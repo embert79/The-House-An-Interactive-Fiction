@@ -1,25 +1,43 @@
 
+
 // Create the contents of your room here.
+
+
 alert("Loading main.js!"); //Don't change this line
 player = new Player()
 
 //Create your objects
-let hallway = new Room
+let hallway = new Room("hallway");
 let kitchen = new Room("kitchen", "The kitchen is wet with fresh blood.");
 let bedroom = new Room("bedroom", "The bedroom floor creaks every time you step with a sound coming from the closet.")
 let basement = new Room("basement", "The basement is pitch black with sound of water drops and footsteps.");
 let chaosCorner = new Room("chaos corner", "You find yourself in the middle of chaos, dolls moving and tweezers slicing.")
 let butcherHollow = new Room("butchers hollow", "You see a man slicing dead animals and he's coming for you.")
-let towel  = new Item("towel",)
-let bread =  new Item("bread",)
-let doll =  new Item("doll",)
-let tweezers =  new Item("tweezers",)
-let sword =  new Item("sword",)
-let skeletonBones =  new Item("skeletonBones",)
-let vase =  new Item("vase",)
-let suitcase =  new Item("suitcase",)
-let roosterFeet =  new Item("roosterFeet",)
-let pigBrain =  new Item("pigBrain",)
+let towel  = new Item("towel","soaking in blood.")
+let bread =  new Item("bread","moldy with bite marks.")
+let doll =  new Item("doll","slowly walking towards you and whispering things to you.")
+let tweezers =  new Item("tweezer","sharp with blood on the tip and fingerprints in blood.")
+let sword =  new Item("sword","silver with a diamond handle.")
+let skeletonBone =  new Item("skeletonBone","dry with remains of humans.")
+let vase =  new Item("vase","golden with symbols of war.")
+let suitcase =  new Item("suitcase","ripped with bodies inside.")
+let roosterFeet =  new Item("roosterFeet","rotten with a mold scent coming off of it.")
+let pigBrain =  new Item("pigBrain","squishy and shredded by the butcher.")
+
+let eatAction = /eat/;
+let eat = function(action, player, object) {
+  if (action == 'eat') {
+    object.eat();
+  }
+  return player;
+}
+addAction(eatAction, eat);
+
+Item.prototype.eat = function() {
+  addLine("You ate the " + this.name + " and have been poisened");
+}
+
+
 // Put them in their spots
 kitchen.addItem(towel);
 kitchen.addItem(bread);
@@ -29,14 +47,14 @@ bedroom.addItem(suitcase);
 bedroom.addItem(vase);
 bedroom.addItem(chaosCorner);
 basement.addItem(sword);
-basement.addItem(skeletonBones);
+basement.addItem(skeletonBone);
 chaosCorner.addItem(doll);
 chaosCorner.addItem(tweezers);
 butcherHollow.addItem(roosterFeet);
 butcherHollow.addItem(pigBrain);
 let locations = [];
 locations.push(kitchen, bedroom);
-player.location = new Room("hallway");
-player.location.addItems(locations);
 
-player.location.enter();
+hallway.addItems(locations);
+
+player.move(hallway);
