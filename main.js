@@ -1,5 +1,14 @@
 // Create the contents of your room here.
+class Food extends Item {
+  constructor(name, descriptor, text) {
+    super(name, descriptor);
+    this.text = text;
+  }
 
+  eat() {
+    addLine("You ate the " + this.name + ". " + this.text)
+  }
+}
 
 alert("Loading main.js!"); //Don't change this line
 player = new Player()
@@ -11,16 +20,17 @@ let bedroom = new Room("master bedroom", "The bedroom floor creaks every time yo
 let basement = new Room("basement", "The basement is pitch black with sound of water drops and footsteps.");
 let chaosCorner = new Room("guest bedroom", "You find yourself in the middle of chaos, dolls moving and tweezers slicing.")
 let butcherHollow = new Room("butchers basement", "You see a man slicing dead animals and he's coming for you.")
+
 let towel = new Item("towel", "soaking in blood.")
-let bread = new Item("bread", "moldy with bite marks.")
+let bread = new Food("bread", "moldy with bite marks.", "and you become sick.")
 let doll = new Item("doll", "slowly walking towards you and whispering things to you.")
 let tweezers = new Item("tweezer", "sharp with blood on the tip and fingerprints in blood.")
 let sword = new Item("sword", "silver with a diamond handle.")
-let skeletonBone = new Item("skeletonBone", "dry with remains of humans.")
+let skeletonBone = new Food("skeletonBone", "dry with remains of humans.")
 let vase = new Item("vase", "golden with symbols of war.")
 let suitcase = new Item("suitcase", "ripped with bodies inside.")
-let roosterFeet = new Item("roosterFeet", "rotten with a mold scent coming off of it.")
-let pigBrain = new Item("pigBrain", "squishy and shredded by the butcher.")
+let roosterFeet = new Food("roosterFeet", "rotten with a mold scent coming off of it.")
+let pigBrain = new Food("pigBrain", "squishy and shredded by the butcher.")
 
 // Put them in their spots
 kitchen.addItem(towel);
@@ -51,10 +61,6 @@ let eat = function(action, player, object) {
   return player;
 }
 addAction(eatAction, eat);
-
-Item.prototype.eat = function() {
-  addLine("You ate the " + this.name + " and have been poisened.");
-}
 
 
 let lickAction = /lick/;
