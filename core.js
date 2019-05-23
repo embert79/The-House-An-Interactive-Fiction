@@ -194,9 +194,10 @@ class Room {
 }
 
 class Item {
-  constructor(name, descriptor) {
+  constructor(name, descriptor, text) {
     this.name = name;
     this.descriptor = descriptor;
+    this.text = text
   }
 
   inspect() {

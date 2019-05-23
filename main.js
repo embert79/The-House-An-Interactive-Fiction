@@ -1,14 +1,14 @@
 // Create the contents of your room here.
 class Food extends Item {
   constructor(name, descriptor, text) {
-    super(name, descriptor);
-    this.text = text;
+    super(name, descriptor, text);
   }
 
   eat() {
-    addLine("You ate the " + this.name + ". " + this.text)
+    addLine("You ate the " + this.name + ", " + this.text)
   }
 }
+
 
 alert("Loading main.js!"); //Don't change this line
 player = new Player()
@@ -20,10 +20,35 @@ let bedroom = new Room("master bedroom", "The bedroom floor creaks every time yo
 let basement = new Room("basement", "The basement is pitch black with sound of water drops and footsteps.");
 let chaosCorner = new Room("guest bedroom", "You find yourself in the middle of chaos, dolls moving and tweezers slicing.")
 let butcherHollow = new Room("butchers basement", "You see a man slicing dead animals and he's coming for you.")
-
-let towel = new Item("towel", "soaking in blood.")
-let bread = new Food("bread", "moldy with bite marks.", "and you become sick.")
-let doll = new Item("doll", "slowly walking towards you and whispering things to you.")
+let hospital = new Room("hospital", "")
+let emergencyRoom = new Room("Emergency Room","")
+let frontDesk = new Room("Front Desk","")
+let dayRoom = new Room("Day Room","")
+let houseKeeper = new Room("House Keeper's Office","")
+let operatingRoom = new Room("Operation Room","")
+let nursery = new Room("Nursery","")
+let paddedCell = new Room("Padded Cell","")
+let surgeryRoom = new Room("Surgery Room","")
+let dischargeLounge= new Room("Discharge Room","")
+let cautionSign= new Item ("Caution Sign","")
+let chair = new Item("chair","")
+let televison = new Item("television","")
+let bandage = new Item("bandage","")
+let money = new Item("coin","")
+let pill = new Food("pill","")
+let painting = new Item("painting","")
+let bedSheet = new Item("bed sheet","")
+let stretcher = new Item("stretcher","")
+let surgicalTable = new Item("surgical table","")
+let syringe = new Item("syringe","")
+let wheelchair = new Item("wheel chair","")
+let thermometer = new Item("thermometer","")
+let blanket = new Item("blanket","")
+let couch = new Item("couch","")
+let towel = new Item("towel", "soaking in blood.", "your hand is now covered in blood.")
+let bread = new Food("bread", "white with sesame seeds.", "and you become sick.")
+let butter = new Food("butter")
+let doll = new Item("doll", "slowly walking towards you and whispering things to you.", " and the doll bit you, find bandages or leave room to heal yourself.")
 let tweezers = new Item("tweezer", "sharp with blood on the tip and fingerprints in blood.")
 let sword = new Item("sword", "silver with a diamond handle.")
 let skeletonBone = new Food("skeletonBone", "dry with remains of humans.")
@@ -47,7 +72,7 @@ chaosCorner.addItem(tweezers);
 butcherHollow.addItem(roosterFeet);
 butcherHollow.addItem(pigBrain);
 let locations = [];
-locations.push(kitchen, bedroom);
+locations.push(kitchen, bedroom, );
 
 hallway.addItems(locations);
 
@@ -72,9 +97,6 @@ let lick = function(action, player, object) {
 }
 addAction(lickAction, lick);
 
-Item.prototype.lick = function() {
-  addLine("You lick the " + this.name + " and you have been burned.");
-}
 
 let touchAction = /touch/;
 let touch = function(action, player, object) {
@@ -84,7 +106,3 @@ let touch = function(action, player, object) {
   return player;
 }
 addAction(touchAction, touch);
-
-Item.prototype.touch = function() {
-  addLine("You touch the " + this.name + " and your hands are wet.");
-}
