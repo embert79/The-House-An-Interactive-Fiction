@@ -75,7 +75,7 @@ function doAction(action, player, newLocation) {
     }
   }
   console.log(actions.length);
-  if (e < actions.length - 1) {
+  if (e == actions.length - 1) {
     addLine("You can't do that.");
   }
   return player
@@ -204,17 +204,33 @@ class Item {
     let description = this.descriptor
     addLine("The " + this.name + " is " + description)
   }
+  acquire(inventory, obj) {
+    inventory.push(obj)
+  }
+
+  use() {
+    addLine("It doesn't seem to do anything.")
+  }
 }
 
 class Player {
   constructor(location) {
     this.location = location;
     this.cameFrom = null;
+    this.inventory = [];
   }
 
   move(location) {
     this.cameFrom = this.location
     this.location = location;
     this.location.enter();
+  }
+
+  check() {
+    let list = "";
+    for(i in this.inventory) {
+      list = list + " " + this.inventory[i].name;
+    }
+    addLine(list)
   }
 }

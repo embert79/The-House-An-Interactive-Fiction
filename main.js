@@ -1,4 +1,15 @@
 // Create the contents of your room here.
+// class Heal extends Item {
+//   constructor(name, descriptor, text){
+//     super(name, descriptor, text);
+// }
+//     use() {
+//       addLine("You used the " + this.name + ". " + "You are now healed.")
+//     acquire() {
+//
+//     }
+//     }
+// }
 class Food extends Item {
   constructor(name, descriptor, text) {
     super(name, descriptor, text);
@@ -56,7 +67,7 @@ let dischargeLounge= new Room("Discharge Room","where patients relax after their
 let cautionSign= new Item ("Caution Sign","red with blood covering the words.")
 let chair = new Item("chair","squishy with red marks.")
 let televison = new Item("television","on the wall with most scary and mysterious videos playing.")
-let bandage = new Food("bandage","usable if you go to the Operating Room.","you have been given one bandage.")
+let bandage = new Item("bandage","usable if you go to the Operating Room.","you have been given one bandage.")
 let money = new Food("coin","worth $100.","and you have been given $100.")
 let pill = new Food("pill","white","and you now become nauseous.")
 let painting = new Item("painting","on the wall and blinking.")
@@ -103,14 +114,22 @@ butcherHollow.addItem(bandage)
 
 frontDesk.addItem(couch)
 frontDesk.addItem(chair)
+frontDesk.addItem(emergencyRoom)
+frontDesk.addItem(houseKeeper)
 emergencyRoom.addItem(stretcher)
 emergencyRoom.addItem(cautionSign)
+emergencyRoom.addItem(dischargeLounge)
+emergencyRoom.addItem(surgeryRoom)
 houseKeeper.addItem(bedSheet)
 houseKeeper.addItem(wheelchair)
+houseKeeper.addItem(paddedCell)
 dischargeLounge.addItem(painting)
 surgeryRoom.addItem(surgicalTable)
 surgeryRoom.addItem(syringe)
+surgeryRoom.addItem(operatingRoom)
 paddedCell.addItem(pill)
+paddedCell.addItem(nursery)
+paddedCell.addItem(bandage)
 nursery.addItem(blanket)
 nursery.addItem(televison)
 operatingRoom.addItem(thermometer)
@@ -137,21 +156,30 @@ let eat = function(action, player, object) {
 addAction(eatAction, eat);
 
 
-let lickAction = /lick/;
-let lick = function(action, player, object) {
-  if (action == 'lick') {
-    object.lick();
+let useAction = /use/;
+let use = function(action, player, object) {
+  if (action == 'use') {
+    object.use();
   }
   return player;
 }
-addAction(lickAction, lick);
+addAction(useAction, use);
 
 
-let touchAction = /touch/;
-let touch = function(action, player, object) {
-  if (action == 'touch') {
-    object.touch();
+let acquireAction = /acquire/;
+let acquire = function(action, player, object) {
+  if (action == 'acquire') {
+    object.acquire(player.inventory, object);
   }
   return player;
 }
-addAction(touchAction, touch);
+addAction(acquireAction, acquire);
+
+let checkAction = /check/;
+let check = function(action, player, object) {
+  if (action == 'acquire') {
+    player.check();
+  }
+  return player;
+}
+addAction(checkAction, check);
