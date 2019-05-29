@@ -10,6 +10,8 @@
 //     }
 //     }
 // }
+var bandage = 0;
+
 class Food extends Item {
   constructor(name, descriptor, text) {
     super(name, descriptor, text);
@@ -42,6 +44,18 @@ class Food extends Item {
   }
 }
 
+class Bandage extends Item {
+  constructor(name, descriptor, text) {
+    super(name, descriptor, text);
+  }
+
+  acquire() {
+    inventory.push(obj)
+    bandage++;
+    document.getElementById('bandage').innerHTML = bandage;
+  }
+}
+
 
 alert("Loading main.js!"); //Don't change this line
 player = new Player()
@@ -55,19 +69,19 @@ let chaosCorner = new Room("guest bedroom", "You find yourself in the middle of 
 let butcherHollow = new Room("butchers basement", "You see a man slicing dead animals and he's coming for you.")
 
 let hospital = new Room("hospital", "")
-let emergencyRoom = new Room("Emergency Room","red with docters speed walking around.")
-let frontDesk = new Room("Front Desk","white with a desk at the front of room.")
-let houseKeeper = new Room("House Keeper's Office","dark with wet cleaning supplies.")
-let operatingRoom = new Room("Operation Room","dark with docters screaming and doing surgery.")
-let nursery = new Room("Nursery","large with kids wandering around waiting for their parents.")
-let paddedCell = new Room("Padded Cell","where people go if they try hurting themselves.")
-let surgeryRoom = new Room("Surgery Room","where patients get surgery but it usually doesn't work.")
-let dischargeLounge= new Room("Discharge Room","where patients relax after their surgery that didn't go as planned.")
+let emergencyRoom = new Room("emergency room","red with docters speed walking around.")
+let frontDesk = new Room("front desk","white with a desk at the front of room.")
+let houseKeeper = new Room("cleaning room","dark with wet cleaning supplies.")
+let operatingRoom = new Room("operation room","dark with docters screaming and doing surgery.")
+let nursery = new Room("nursery","large with kids wandering around waiting for their parents.")
+let paddedCell = new Room("padded cell","where people go if they try hurting themselves.")
+let surgeryRoom = new Room("surgery room","where patients get surgery but it usually doesn't work.")
+let dischargeLounge= new Room("discharge room","where patients relax after their surgery that didn't go as planned.")
 
-let cautionSign= new Item ("Caution Sign","red with blood covering the words.")
+let cautionSign= new Item ("caution sign","red with blood covering the words.")
 let chair = new Item("chair","squishy with red marks.")
 let televison = new Item("television","on the wall with most scary and mysterious videos playing.")
-let bandage = new Item("bandage","usable if you go to the Operating Room.","you have been given one bandage.")
+let Bandages = new Item("bandage","usable if you go to the Operating Room.","you have been given one bandage.")
 let money = new Food("coin","worth $100.","and you have been given $100.")
 let pill = new Food("pill","white","and you now become nauseous.")
 let painting = new Item("painting","on the wall and blinking.")
@@ -98,7 +112,7 @@ kitchen.addItem(butter)
 kitchen.addItem(bread);
 kitchen.addItem(butcherHollow);
 kitchen.addItem(basement);
-kitchen.addItem(bandage)
+kitchen.addItem(Bandages)
 bedroom.addItem(suitcase);
 bedroom.addItem(vase);
 bedroom.addItem(chaosCorner);
@@ -106,11 +120,11 @@ basement.addItem(sword);
 basement.addItem(skeletonBone);
 chaosCorner.addItem(doll);
 chaosCorner.addItem(tweezers);
-chaosCorner.addItem(bandage)
-chaosCorner.addItem(bandage)
+chaosCorner.addItem(Bandages)
+chaosCorner.addItem(Bandages)
 butcherHollow.addItem(roosterFeet);
 butcherHollow.addItem(pigBrain);
-butcherHollow.addItem(bandage)
+butcherHollow.addItem(Bandages)
 
 frontDesk.addItem(couch)
 frontDesk.addItem(chair)
@@ -129,14 +143,14 @@ surgeryRoom.addItem(syringe)
 surgeryRoom.addItem(operatingRoom)
 paddedCell.addItem(pill)
 paddedCell.addItem(nursery)
-paddedCell.addItem(bandage)
+paddedCell.addItem(Bandages)
 nursery.addItem(blanket)
 nursery.addItem(televison)
 operatingRoom.addItem(thermometer)
-operatingRoom.addItem(bandage)
-operatingRoom.addItem(bandage)
-operatingRoom.addItem(bandage)
-operatingRoom.addItem(bandage)
+operatingRoom.addItem(Bandages)
+operatingRoom.addItem(Bandages)
+operatingRoom.addItem(Bandages)
+operatingRoom.addItem(Bandages)
 
 
 let locations = [];
@@ -170,6 +184,7 @@ let acquireAction = /acquire/;
 let acquire = function(action, player, object) {
   if (action == 'acquire') {
     object.acquire(player.inventory, object);
+    //object.acquire()
   }
   return player;
 }

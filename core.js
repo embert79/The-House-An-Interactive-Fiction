@@ -231,6 +231,6 @@ class Player {
     for(i in this.inventory) {
       list = list + " " + this.inventory[i].name;
     }
-    addLine(list)
+    //addLine(list)
   }
 }
