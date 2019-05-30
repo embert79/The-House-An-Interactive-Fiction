@@ -10,7 +10,7 @@
 //     }
 //     }
 // }
-var bandage = 0;
+
 
 class Food extends Item {
   constructor(name, descriptor, text) {
@@ -52,7 +52,7 @@ class Bandage extends Item {
   acquire() {
     inventory.push(obj)
     bandage++;
-    document.getElementById('bandage').innerHTML = bandage;
+
   }
 }
 
@@ -158,7 +158,7 @@ locations.push(kitchen, bedroom, );
 
 hallway.addItems(locations);
 
-player.move(hallway);
+player.move(operatingRoom);
 
 let eatAction = /eat/;
 let eat = function(action, player, object) {
@@ -184,7 +184,7 @@ let acquireAction = /acquire/;
 let acquire = function(action, player, object) {
   if (action == 'acquire') {
     object.acquire(player.inventory, object);
-    //object.acquire()
+
   }
   return player;
 }

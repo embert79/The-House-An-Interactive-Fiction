@@ -1,5 +1,5 @@
 // Handle user input
-
+var bandage = 0;
 var regexes = [
   /enter/,
   /go back/,
@@ -85,6 +85,7 @@ function doAction(action, player, newLocation) {
 document.addEventListener("keydown", keyDownHandler, false);
 
 function keyDownHandler(e) {
+  document.getElementById("bandage").innerHTML = "Bandages: "+ bandage;
   if (e.key == "Enter") {
     let input = document.getElementById('inputsm').value
     if (input.length > 0) {
