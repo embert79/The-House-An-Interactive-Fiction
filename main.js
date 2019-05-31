@@ -1,15 +1,4 @@
-// Create the contents of your room here.
-// class Heal extends Item {
-//   constructor(name, descriptor, text){
-//     super(name, descriptor, text);
-// }
-//     use() {
-//       addLine("You used the " + this.name + ". " + "You are now healed.")
-//     acquire() {
-//
-//     }
-//     }
-// }
+
 
 
 class Food extends Item {
@@ -47,11 +36,18 @@ class Food extends Item {
 class Bandage extends Item {
   constructor(name, descriptor, text) {
     super(name, descriptor, text);
+
   }
 
   acquire() {
-    inventory.push(obj)
     bandage++;
+    addLine("You have " + bandage + " bandages.")
+
+  }
+
+  use() {
+    bandage--;
+    addLine("You have " + bandage + " left and you've been healed.")
 
   }
 }
@@ -77,11 +73,12 @@ let nursery = new Room("nursery","large with kids wandering around waiting for t
 let paddedCell = new Room("padded cell","where people go if they try hurting themselves.")
 let surgeryRoom = new Room("surgery room","where patients get surgery but it usually doesn't work.")
 let dischargeLounge= new Room("discharge room","where patients relax after their surgery that didn't go as planned.")
-
+let basementDoor= new Room("basement door", "You inspect and you have a 50/50 chance of living if you go through.")
+let randomDoor= new Room("random door")
 let cautionSign= new Item ("caution sign","red with blood covering the words.")
 let chair = new Item("chair","squishy with red marks.")
 let televison = new Item("television","on the wall with most scary and mysterious videos playing.")
-let Bandages = new Item("bandage","usable if you go to the Operating Room.","you have been given one bandage.")
+let Bandages = new Bandage("bandage","the will heal you.","you have been healed")
 let money = new Food("coin","worth $100.","and you have been given $100.")
 let pill = new Food("pill","white","and you now become nauseous.")
 let painting = new Item("painting","on the wall and blinking.")
@@ -125,6 +122,7 @@ chaosCorner.addItem(Bandages)
 butcherHollow.addItem(roosterFeet);
 butcherHollow.addItem(pigBrain);
 butcherHollow.addItem(Bandages)
+butcherHollow.addItem(basementDoor)
 
 frontDesk.addItem(couch)
 frontDesk.addItem(chair)
@@ -151,14 +149,22 @@ operatingRoom.addItem(Bandages)
 operatingRoom.addItem(Bandages)
 operatingRoom.addItem(Bandages)
 operatingRoom.addItem(Bandages)
+operatingRoom.addItem(randomDoor)
 
+basementDoor.enter = function () {
+  addLine("You have left the building, you win.")
+}
+
+randomDoor.enter = function () {
+  addLine("You have escaped from the hospital. Congratulation, you win.")
+}
 
 let locations = [];
 locations.push(kitchen, bedroom, );
 
 hallway.addItems(locations);
 
-player.move(operatingRoom);
+player.move(hallway);
 
 let eatAction = /eat/;
 let eat = function(action, player, object) {
