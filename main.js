@@ -46,7 +46,10 @@ class Bandage extends Item {
   }
 
   use() {
-    bandage--;
+    if(bandage > 0) {
+      bandage--;
+    }
+  
     addLine("You have " + bandage + " left and you've been healed.")
 
   }
